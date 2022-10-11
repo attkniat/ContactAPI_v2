@@ -4,8 +4,6 @@ using ContactEngine.ContactsInterfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ContactEngine.ContactServices
@@ -20,24 +18,65 @@ namespace ContactEngine.ContactServices
             }
         }
 
-        public Task<Contact> GetContactByIdAsync(int contactId)
+        public async Task<Contact> GetContactByIdAsync(int contactId)
         {
-            throw new NotImplementedException();
+            using (var db = new AppDBContext())
+            {
+                return await db.Contacts.FirstOrDefaultAsync(contact => contact.ContactId == contactId);
+            }
         }
 
-        public Task<bool> CreateContactAsync(Contact contactToCreate)
+        public async Task<bool> CreateContactAsync(Contact contactToCreate)
         {
-            throw new NotImplementedException();
+            using (var db = new AppDBContext())
+            {
+                try
+                {
+                    await db.Contacts.AddAsync(contactToCreate);
+
+                    return await db.SaveChangesAsync() >= 1;
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
         }
 
-        public Task<bool> UpdateContactAsync(Contact contactToUpdate)
+        public async Task<bool> UpdateContactAsync(Contact contactToUpdate)
         {
-            throw new NotImplementedException();
+            using (var db = new AppDBContext())
+            {
+                try
+                {
+                    db.Contacts.Update(contactToUpdate);
+
+                    return await db.SaveChangesAsync() >= 1;
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
         }
 
-        public Task<bool> DeletePostAsync(int contactId)
+        public async Task<bool> DeletePostAsync(int contactId)
         {
-            throw new NotImplementedException();
+            using (var db = new AppDBContext())
+            {
+                try
+                {
+                    Contact contactToDelete = await GetContactByIdAsync(contactId);
+
+                    db.Remove(contactToDelete);
+
+                    return await db.SaveChangesAsync() >= 1;
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+            }
         }
     }
 }
