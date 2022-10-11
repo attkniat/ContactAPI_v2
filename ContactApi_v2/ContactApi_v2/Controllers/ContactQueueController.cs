@@ -18,7 +18,7 @@ namespace ContactApi_v2.Controllers
         {
             try
             {
-                var queueCliente = new QueueClient(ConstantesQueue.StorageAccountStr, ConstantesQueue.ContactQueueName);
+                var queueCliente = new QueueClient(ConstantsQueue.StorageAccountStr, ConstantsQueue.ContactQueueName);
                 var jsonContact = JsonSerializer.Serialize(contact);
                 await queueCliente.SendMessageAsync(jsonContact);
             }

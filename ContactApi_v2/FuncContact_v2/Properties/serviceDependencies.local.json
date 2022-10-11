@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "storage1": {
+      "type": "storage.emulator",
+      "connectionId": "AzureWebJobsStorage"
+    },
+    "storage2": {
+      "secretStore": null,
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Storage/storageAccounts/contactv2storageaccount",
+      "type": "storage.azure",
+      "connectionId": "ConnStrNameFunc",
+      "dynamicId": null
+    }
+  }
+}
