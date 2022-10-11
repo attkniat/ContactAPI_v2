@@ -1,5 +1,7 @@
 ﻿using ContactEngine.ContactModel;
 using Microsoft.EntityFrameworkCore;
+using System.IO;
+using System.Reflection;
 
 namespace ContactEngine.ContactData
 {
@@ -7,7 +9,14 @@ namespace ContactEngine.ContactData
     {
         public DbSet<Contact> Contacts { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder) => dbContextOptionsBuilder.UseSqlite("Data Source=C:/Users/nathan.oliveira/Desktop/ContactAPI_v2/ContactApi_v2/ContactEngine/ContactData/AppDB.db");
+        protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder)
+        {
+            var dirPath = Assembly.GetExecutingAssembly().Location;
+            dirPath = Path.GetDirectoryName(dirPath);
+            var fullPath = Path.GetFullPath(Path.Combine(dirPath, "ContactData/AppDB.db"));
+
+            dbContextOptionsBuilder.UseSqlite($"Data Source={fullPath}");
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
