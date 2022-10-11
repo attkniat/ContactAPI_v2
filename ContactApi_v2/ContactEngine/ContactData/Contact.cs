@@ -9,7 +9,7 @@ namespace ContactEngine.ContactData
 
         [Required]
         [StringLength(100)]
-        public string Nome { get; set; }
+        public string Name { get; set; }
 
         [StringLength(100)]
         public string Email { get; set; }
