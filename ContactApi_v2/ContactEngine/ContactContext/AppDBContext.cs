@@ -1,4 +1,4 @@
-﻿using ContactEngine.ContactData;
+﻿using ContactEngine.ContactModel;
 using Microsoft.EntityFrameworkCore;
 
 namespace ContactEngine.ContactContext

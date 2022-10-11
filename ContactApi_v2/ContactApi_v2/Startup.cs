@@ -1,3 +1,5 @@
+using ContactEngine.ContactServices;
+using ContactEngine.ContactsInterfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,6 +34,8 @@ namespace ContactApi_v2
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ContactApi_v2", Version = "v1" });
             });
+
+            services.AddTransient<IContactRepository, ContactRepositoryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
