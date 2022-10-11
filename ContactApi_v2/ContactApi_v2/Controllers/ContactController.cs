@@ -7,7 +7,7 @@ namespace ContactApi_v2.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ContactController : ControllerBase
+    public class ContactController : Controller
     {
         private readonly IContactRepository _contactRepository;
 
