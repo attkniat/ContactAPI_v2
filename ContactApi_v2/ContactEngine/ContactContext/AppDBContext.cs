@@ -1,13 +1,13 @@
 ﻿using ContactEngine.ContactModel;
 using Microsoft.EntityFrameworkCore;
 
-namespace ContactEngine.ContactContext
+namespace ContactEngine.ContactData
 {
-    internal class AppDBContext : DbContext
+    public class AppDBContext : DbContext
     {
         public DbSet<Contact> Contacts { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder) => dbContextOptionsBuilder.UseSqlite("Data Source=./ContactData/AppDB.db");
+        protected override void OnConfiguring(DbContextOptionsBuilder dbContextOptionsBuilder) => dbContextOptionsBuilder.UseSqlite("Data Source=C:/Users/nathan.oliveira/Desktop/ContactAPI_v2/ContactApi_v2/ContactEngine/ContactData/AppDB.db");
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
