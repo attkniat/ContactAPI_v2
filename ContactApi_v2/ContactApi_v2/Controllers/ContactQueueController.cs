@@ -18,7 +18,7 @@ namespace ContactApi_v2.Controllers
         {
             try
             {
-                var queueCliente = new QueueClient(ConstantsQueue.StorageAccountStr, ConstantsQueue.ContactQueueName, new QueueClientOptions
+                var queueCliente = new QueueClient(ConstantsQueue.StorageAccountStr, ConstantsQueue.CreateQueue, new QueueClientOptions
                 {
                     MessageEncoding = QueueMessageEncoding.Base64
                 });
@@ -32,13 +32,13 @@ namespace ContactApi_v2.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("update-contact-send-queue")]
         public async Task UpdateContactQueue([FromBody] Contact contact)
         {
             try
             {
-                var queueCliente = new QueueClient(ConstantsQueue.StorageAccountStr, ConstantsQueue.ContactQueueName, new QueueClientOptions
+                var queueCliente = new QueueClient(ConstantsQueue.StorageAccountStr, ConstantsQueue.UpdateQueue, new QueueClientOptions
                 {
                     MessageEncoding = QueueMessageEncoding.Base64
                 });
@@ -52,13 +52,13 @@ namespace ContactApi_v2.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpDelete]
         [Route("delete-contact-send-queue")]
-        public async Task DeleteContactQueue([FromBody] int contactId)
+        public async Task DeleteContactQueue(int contactId)
         {
             try
             {
-                var queueCliente = new QueueClient(ConstantsQueue.StorageAccountStr, ConstantsQueue.ContactQueueName, new QueueClientOptions
+                var queueCliente = new QueueClient(ConstantsQueue.StorageAccountStr, ConstantsQueue.DeleteQueue, new QueueClientOptions
                 {
                     MessageEncoding = QueueMessageEncoding.Base64
                 });
