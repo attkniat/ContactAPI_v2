@@ -14,14 +14,8 @@ namespace FuncContact_v2.ContactsV2Functions
     {
 
         [FunctionName("CreateContactFunc")]
-
-#if DEBUG
         public static void CreateContactQueue([QueueTrigger(Constants.CreateQueue, Connection = "StorageStringConnection")] string contactToCreate, ILogger log)
         {
-#else
-        public static void CreateContactQueue([QueueTrigger(Constants.CreateQueue, Connection = SettingsHelper.StorageStringConnection)] string contactToCreate, ILogger log)
-        {
-#endif
             var contact = JsonConvert.DeserializeObject<Contact>(contactToCreate);
             var client = new HttpClient();
 

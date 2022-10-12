@@ -12,13 +12,8 @@ namespace FuncContact_v2.ContactsV2Functions
     public static class DeleteContactFunction
     {
         [FunctionName("DeleteContactFunc")]
-#if DEBUG
         public static void DeleteContactQueue([QueueTrigger(Constants.DeleteQueue, Connection = "StorageStringConnection")] string contactIdToDelete, ILogger log)
         {
-#else
-        public static void DeleteContactQueue([QueueTrigger(Constants.DeleteQueue, Connection = SettingsHelper.StorageStringConnection)] string contactIdToDelete, ILogger log)
-        {
-#endif
             var contactId = JsonConvert.DeserializeObject<int>(contactIdToDelete);
 
             var client = new HttpClient();

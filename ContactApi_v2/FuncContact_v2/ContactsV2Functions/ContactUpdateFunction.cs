@@ -13,14 +13,8 @@ namespace FuncContact_v2.ContactsV2Functions
     public static class ContactUpdateFunction
     {
         [FunctionName("UpdateContactFunc")]
-
-#if DEBUG
         public static void UpdateContactQueue([QueueTrigger(Constants.UpdateQueue, Connection = "StorageStringConnection")] string contactToUpdate, ILogger log)
         {
-#else
-        public static void UpdateContactQueue([QueueTrigger(Constants.UpdateQueue, Connection = SettingsHelper.StorageStringConnection)] string contactToUpdate, ILogger log)
-        {
-#endif
             var contact = JsonConvert.DeserializeObject<Contact>(contactToUpdate);
             var client = new HttpClient();
 
