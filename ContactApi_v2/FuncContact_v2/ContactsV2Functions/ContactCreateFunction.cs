@@ -6,14 +6,22 @@ using FuncContact_v2.ContactModel;
 using System.Net.Http;
 using System.Text;
 using System;
+using FuncContact_v2.UtilExtensions;
 
 namespace FuncContact_v2.ContactsV2Functions
 {
     public static class ContactCreateFunction
     {
+
         [FunctionName("CreateContactFunc")]
-        public static void CreateContactQueue([QueueTrigger(Constants.CreateQueue, Connection = "ConnStrFunc")] string contactToCreate, ILogger log)
+
+#if DEBUG
+        public static void CreateContactQueue([QueueTrigger(Constants.CreateQueue, Connection = "StorageStringConnection")] string contactToCreate, ILogger log)
         {
+#else
+        public static void CreateContactQueue([QueueTrigger(Constants.CreateQueue, Connection = SettingsHelper.StorageStringConnection)] string contactToCreate, ILogger log)
+        {
+#endif
             var contact = JsonConvert.DeserializeObject<Contact>(contactToCreate);
             var client = new HttpClient();
 
@@ -21,7 +29,11 @@ namespace FuncContact_v2.ContactsV2Functions
             {
                 try
                 {
+#if DEBUG
                     var result = client.PostAsync("https://localhost:44321/Contact/create-contact", content).Result;
+#else
+                    var result = client.PostAsync($"{SettingsHelper.GetAPIUrlString()}Contact/create-contact", content).Result;
+#endif
                 }
                 catch (Exception ex)
                 {
