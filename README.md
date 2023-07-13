@@ -9,6 +9,6 @@ REST API which will store people and their contacts. A person can have multiople
 - EF Core
 - SOLID
 - Azure Deploy
-- Azure Stora Account
+- Azure Storage Account
 - Azure Funtions
 - Message Bus Trigger
