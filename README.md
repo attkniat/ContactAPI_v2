@@ -1,5 +1,5 @@
 # ContactAPI_v2
-REST API which will store people and their contacts. A person can have multiople contacts such as phone, email or whatsapp. CRUD of people and the contacts
+REST API which will store people and their contacts. A person can have multiple contacts such as phone, email or whatsapp. CRUD of people and the contacts
 
 
 # Technologies
